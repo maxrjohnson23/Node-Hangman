@@ -9,15 +9,13 @@ function Word(word){
 }
 
 Word.prototype.displayWord = function() {
-    // let word = "";
     // // Each letter determines the value to show
-    // this.letterArray.forEach(l => word += `${l.displayLetter()} `);
-    // return word;
     return this.letterArray.map(letter => letter.displayLetter()).join(' ');
 
 };
 
 Word.prototype.peekWord = function() {
+    // Peek at the characters to reveal the word
     return this.letterArray.map(letter => letter.character).join('');
 };
 
