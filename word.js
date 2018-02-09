@@ -9,9 +9,8 @@ function Word(word){
 }
 
 Word.prototype.displayWord = function() {
-    // // Each letter determines the value to show
+    // Each letter determines the value to show
     return this.letterArray.map(letter => letter.displayLetter()).join(' ');
-
 };
 
 Word.prototype.peekWord = function() {

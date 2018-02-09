@@ -20,24 +20,40 @@ let again = [{
     default: "Y"
 }];
 
-function promptUserGuess(word) {
+function promptUserGuess(word, userGuesses) {
     inquirer.prompt(question).then(answer => {
-        //
-        word.guessLetter(answer.userGuess.toUpperCase());
-        let displayWord = word.displayWord();
+        // Check user's guess against the word
+        let userLetter = answer.userGuess.toUpperCase();
+        word.guessLetter(userLetter);
 
+        let displayWord = word.displayWord();
         console.log(displayWord);
 
-        if(displayWord.includes('_')) {
-            // Word is not yet uncovered, continue input
-            promptUserGuess(word);
+        // Evaluate user's guess
+        if(displayWord.includes(userLetter)) {
+            console.log('Correct!');
         } else {
-            console.log('You Win!');
+            console.log('Incorrect!');
+            userGuesses--;
+        }
+
+        // Word completed, finish the game
+        if(!displayWord.includes('_')) {
+            console.log('You Win!!');
             // See if the user wants to play again
             playAgain();
+        } else if (userGuesses === 0) {
+            console.log('You Lose..');
+            // Reveal the word
+            console.log(`The word was: ${word.peekWord()}`);
+            // See if the user wants to play again
+            playAgain();
+        } else {
+            // Still playing, continue prompting the user
+            promptUserGuess(word, userGuesses);
         }
     });
-};
+}
 
 function playAgain() {
     inquirer.prompt(again).then(answer => {
@@ -50,14 +66,16 @@ function playAgain() {
 }
 
 
-
 function startGame() {
+    // Initialize user guesses
+    let remainingGuesses = 2;
+
     // Generate random word
     const generatedWord = WordBank.generateWord().toUpperCase();
     const word = new Word(generatedWord);
     console.log(generatedWord);
     console.log(word.displayWord());
-    promptUserGuess(word);
+    promptUserGuess(word, remainingGuesses);
 }
 
 startGame();
