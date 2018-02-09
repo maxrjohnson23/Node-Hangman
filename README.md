@@ -19,10 +19,12 @@ $ npm install
  ```
 
 ### Gameplay
-Navigate to the repository folder and run index.js to start
-```
-$ node index.js
-```
+1. Navigate to the repository folder and run index.js to start
 
-Follow the on-screen prompts to reveal the word before your guesses run out!
-![Hangman CLI](samples/hangman.gif?raw=true)
+   ```
+   $ node index.js
+   ```
+
+2. Follow the on-screen prompts to reveal the word before your guesses run out!
+
+   ![Hangman CLI](samples/hangman.gif?raw=true)
