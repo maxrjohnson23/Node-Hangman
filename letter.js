@@ -6,7 +6,7 @@ function Letter(character) {
 
 Letter.prototype.displayLetter = function() {
     // Display the actual or masked letter
-    if(this.guessed) {
+    if(this.guessed || this.character === ' ') {
         return this.character;
     } else {
         return '_';
