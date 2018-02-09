@@ -12,12 +12,12 @@ Word.prototype.displayWord = function() {
     let word = "";
     // Each letter determines the value to show
     this.letterArray.forEach(l => word += `${l.displayLetter()} `);
-    console.log(word);
+    return word;
 };
 
 Word.prototype.guessLetter = function(character) {
     // Check each letter for a match with the user's guess
-    this.letterArray.forEach(l => l.guessLetter(character));
+    this.letterArray.forEach(l => l.checkGuess(character));
 };
 
 module.exports = Word;

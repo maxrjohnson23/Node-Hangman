@@ -15,7 +15,9 @@ Letter.prototype.displayLetter = function() {
 
 Letter.prototype.checkGuess = function(character) {
     // Update guessed value if it matches
-    this.guessed = (this.character === character);
+    if(this.character === character){
+        this.guessed = true;
+    }
 };
 
 module.exports = Letter;
