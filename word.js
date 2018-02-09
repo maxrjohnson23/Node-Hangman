@@ -6,7 +6,6 @@ function Word(word){
         // Create an array of individual letters
         this.letterArray.push(new Letter(letter));
     }
-
 }
 
 Word.prototype.displayWord = function() {
@@ -14,6 +13,11 @@ Word.prototype.displayWord = function() {
     // Each letter determines the value to show
     this.letterArray.forEach(l => word += `${l.displayLetter()} `);
     console.log(word);
+};
+
+Word.prototype.guessLetter = function(character) {
+    // Check each letter for a match with the user's guess
+    this.letterArray.forEach(l => l.guessLetter(character));
 };
 
 module.exports = Word;
