@@ -87,9 +87,9 @@ function startGame() {
 }
 
 function displayGameHeader() {
-    console.log(chalk.bold.blue('----------------------------------'));
-    console.log(chalk.bold.green('Welcome to Hangman - Cars Edition!'));
-    console.log(chalk.bold.blue('---------------------------------- \n'));
+    console.log(chalk.bold.blue('--------------------------------------------------------'));
+    console.log(chalk.bold.green('          Welcome to Hangman - Cars Edition!'));
+    console.log(chalk.bold.blue('-------------------------------------------------------- \n'));
 }
 
 console.reset = function () {
