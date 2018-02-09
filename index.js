@@ -3,25 +3,37 @@ const Word = require('./word');
 const WordBank = require('./wordbank')();
 const inquirer = require('inquirer');
 
+// Prompt for user input
 let question = [{
     name: 'userGuess',
-    message: 'Guess a letter'
+    message: 'Guess a letter',
+    validate: function(value) {
+        let onlySingleLetter = value.match(/^([a-zA-Z-]){1}$/);
+        return onlySingleLetter ? true : 'Please enter a valid letter';
+    }
 }];
 
+// Prompt user to play again
 let again = [{
     name: 'playAgain',
-    message: "Would you like to play again?"
+    message: "Would you like to play again?",
+    default: "Y"
 }];
 
-function promptUser(word) {
+function promptUserGuess(word) {
     inquirer.prompt(question).then(answer => {
+        //
         word.guessLetter(answer.userGuess.toUpperCase());
         let displayWord = word.displayWord();
+
         console.log(displayWord);
+
         if(displayWord.includes('_')) {
-            promptUser(word);
+            // Word is not yet uncovered, continue input
+            promptUserGuess(word);
         } else {
-            console.log('Win!');
+            console.log('You Win!');
+            // See if the user wants to play again
             playAgain();
         }
     });
@@ -29,10 +41,10 @@ function promptUser(word) {
 
 function playAgain() {
     inquirer.prompt(again).then(answer => {
-        if(answer.playAgain) {
+        if(answer.playAgain.toUpperCase() === "Y") {
             startGame();
         } else {
-            console.log('Bye!');
+            console.log('Thanks for playing!');
         }
     })
 }
@@ -45,7 +57,7 @@ function startGame() {
     const word = new Word(generatedWord);
     console.log(generatedWord);
     console.log(word.displayWord());
-    promptUser(word);
+    promptUserGuess(word);
 }
 
 startGame();
