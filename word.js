@@ -9,10 +9,16 @@ function Word(word){
 }
 
 Word.prototype.displayWord = function() {
-    let word = "";
-    // Each letter determines the value to show
-    this.letterArray.forEach(l => word += `${l.displayLetter()} `);
-    return word;
+    // let word = "";
+    // // Each letter determines the value to show
+    // this.letterArray.forEach(l => word += `${l.displayLetter()} `);
+    // return word;
+    return this.letterArray.map(letter => letter.displayLetter()).join(' ');
+
+};
+
+Word.prototype.peekWord = function() {
+    return this.letterArray.map(letter => letter.character).join('');
 };
 
 Word.prototype.guessLetter = function(character) {
