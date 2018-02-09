@@ -22,6 +22,8 @@ let again = [{
 
 function promptUserGuess(word, userGuesses) {
     inquirer.prompt(question).then(answer => {
+        console.reset();
+
         // Check user's guess against the word
         let userLetter = answer.userGuess.toUpperCase();
         word.guessLetter(userLetter);
@@ -54,11 +56,13 @@ function promptUserGuess(word, userGuesses) {
             // Still playing, continue prompting the user
             promptUserGuess(word, userGuesses);
         }
+
     });
 }
 
 function playAgain() {
     inquirer.prompt(again).then(answer => {
+        console.reset();
         if(answer.playAgain.toUpperCase() === "Y") {
             startGame();
         } else {
@@ -77,13 +81,23 @@ function startGame() {
     // **HIDDEN** console.log(generatedWord);
     const word = new Word(generatedWord);
 
-    console.log(chalk.bold(`${word.displayWord()} \n`));
+    console.log(chalk.bold(`\n ${word.displayWord()} \n\n\n\n`));
 
     promptUserGuess(word, remainingGuesses);
 }
 
-console.log(chalk.bold.blue('----------------------------------'));
-console.log(chalk.bold.green('Welcome to Hangman - Cars Edition!'));
-console.log(chalk.bold.blue('---------------------------------- \n'));
+function displayGameHeader() {
+    console.log(chalk.bold.blue('----------------------------------'));
+    console.log(chalk.bold.green('Welcome to Hangman - Cars Edition!'));
+    console.log(chalk.bold.blue('---------------------------------- \n'));
+}
+
+console.reset = function () {
+    // Clears the console for a more fluid user experience
+    process.stdout.write('\033c');
+    displayGameHeader();
+};
+
+console.reset();
 startGame();
 
