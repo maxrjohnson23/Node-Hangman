@@ -13,8 +13,9 @@ Letter.prototype.displayLetter = function() {
     }
 };
 
-Letter.prototype.matches = function(character) {
-    return this.character === character;
+Letter.prototype.checkGuess = function(character) {
+    // Update guessed value if it matches
+    this.guessed = (this.character === character);
 };
 
 module.exports = Letter;
